@@ -8,9 +8,7 @@ const defaultConfig = {
   enableSponsorBlockInteraction: true,
   enableSponsorBlockSelfPromo: true,
   enableSponsorBlockMusicOfftopic: true,
-  videoSpeed: 1,
-  enableDeArrow: true,
-  enableDeArrowThumbnails: false
+  videoSpeed: 1
 };
 
 let localConfig;
