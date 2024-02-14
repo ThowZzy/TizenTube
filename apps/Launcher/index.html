@@ -9,31 +9,28 @@
     <a id="text">Please wait while TizenTube launches.</a>
     <div id="inputbox"></div>
     <script>
-
+        //Store IP once hitting the key "finish"
         document.onkeydown = e => {
-            switch (e.keyCode) {
-                case 65376:
-                    var input = document.getElementById("ip");
-                    localStorage.setItem("ip", input.value);
-                    alert("Set IP to " + input.value);
-                    window.location.reload();
+            if (e.keyCode == 65376) {
+                var input = document.getElementById("ip");
+                localStorage.setItem("ip", input.value);
+                alert("Set IP to " + input.value);
+                window.location.reload();
             }
         };
 
-        // Check if IP was set
-        if (localStorage.getItem("ip") == null) {
-            // Set IP by prompt
+        function prompt_for_ip(previous_IP = "192.168.1.10") {
             document.getElementById("inputbox").innerHTML = `
             <div class="has-mb-12">
                 <h5 class="has-text-light">Set Server IP</h5>
                 <label class="label">Server IP:</label>
-                <input type="text" class="input" placeholder="192.168.1.3" id="ip">
+                <input type="text" class="input" placeholder="IP Address" value="${previous_IP}" id="ip">
             </div>
             `;
             // Focus on input
             const input = document.getElementById("ip");
             input.focus();
-            /*input.onblur = () => {
+            /*input.onblur = () => { //Not sure this is needed
                 // Set IP
                 localStorage.setItem("ip", input.value);
                 alert("Set IP to " + input.value);
@@ -41,15 +38,19 @@
                 window.location.reload();
             }*/
         }
-        else {
 
+        // Check if IP was set
+        if (localStorage.getItem("ip") == null) {
+            // Set IP by prompt
+            prompt_for_ip();
+        } else {
             var IP = localStorage.getItem('ip');
-
             var wsServer;
             try {
                 wsServer = new WebSocket('ws://' + IP + ':3000');
             } catch (e) {
                 document.getElementById('text').innerText = 'Could not connect.';
+                prompt_for_ip(IP);
             }
             wsServer.onmessage = function (message) {
                 const msg = JSON.parse(message.data);
