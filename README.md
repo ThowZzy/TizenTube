@@ -51,3 +51,11 @@ Once the server is up and running, you can access the Launcher app from your TVâ
 8. Please note that if the app crashes, you may have made an error, such as setting an incorrect IP or failing to change the Developer Mode's Host IP.
 
 And now you can launch TizenTube from your Android device!
+
+### How to launch TizenTube ?
+1. Pin the "Launcher" application with the modified youtube logo to your quick launch. (optionnal)
+2. Start the launcher app.
+3. Enter the IP of the server, hit finish.
+4. Done
+
+Now, everytime you want to watch youtube, start the launcher and it will launch an ad-less youtube.
