@@ -10,9 +10,7 @@ const defaultConfig = {
   enableSponsorBlockMusicOfftopic: true,
   videoSpeed: 1,
   enableDeArrow: true,
-  enableDeArrowThumbnails: false,
-  focusContainerColor: '#0f0f0f',
-  routeColor: '#0f0f0f'
+  enableDeArrowThumbnails: false
 };
 
 let localConfig;
