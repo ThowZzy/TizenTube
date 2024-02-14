@@ -1,8 +1,9 @@
 name: Build wgt apps
 
 on:
-  repository_dispatch:
-    types: [build_new_release]
+  push:
+    paths:
+      - 'apps/**'
 
   workflow_dispatch:
   
