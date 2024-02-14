@@ -2,17 +2,19 @@ import { WebSocketServer } from 'ws';
 import adbhost from 'adbhost';
 import startDebugging from './debuggerController.js';
 import Config from './config.json' assert { type: 'json' };
-//const sleep = ms => new Promise(r => setTimeout(r, ms)); **uncomment if launching issue
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 let adb;
 
 async function createAdbConnection(tv_ip) {
     if (adb?._stream) {
-        adb._stream.end(); //Experimental
-        //await sleep(1000) **uncomment if launching issue
+        adb._stream.end();
+        await sleep(200) //Delay to wait for the end of stream
         adb._stream.removeAllListeners('connect');
         adb._stream.removeAllListeners('error');
         adb._stream.removeAllListeners('close');
     }
+    else
+        await sleep(300) //add delay in case tizentube is already started
 
     adb = adbhost.createConnection({ host: tv_ip, port: 26101 });
 
