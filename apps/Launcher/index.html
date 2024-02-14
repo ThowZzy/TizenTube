@@ -38,37 +38,41 @@
                 window.location.reload();
             }*/
         }
-
-        // Check if IP was set
-        if (localStorage.getItem("ip") == null) {
-            // Set IP by prompt
-            prompt_for_ip();
-        } else {
-            var IP = localStorage.getItem('ip');
-            var wsServer;
-            try {
-                wsServer = new WebSocket('ws://' + IP + ':3000');
-            } catch (e) {
-                document.getElementById('text').innerText = 'Could not connect.';
-                prompt_for_ip(IP);
-            }
-            wsServer.onmessage = function (message) {
-                const msg = JSON.parse(message.data);
-                if (msg.ok) {
-                    tizen.application.getCurrentApplication().exit();
+        function connect_to_server() {
+            // Check if IP was set
+            if (localStorage.getItem("ip") == null) {
+                // Set IP by prompt
+                prompt_for_ip();
+                return;
+            } else {
+                var IP = localStorage.getItem('ip');
+                var wsServer;
+                try {
+                    wsServer = new WebSocket('ws://' + IP + ':3000');
+                } catch (e) {
+                    document.getElementById('text').innerText = 'Could not connect.';
+                    prompt_for_ip(IP);
+                    return;
                 }
+                wsServer.onmessage = function (message) {
+                    const msg = JSON.parse(message.data);
+                    if (msg.ok) {
+                        tizen.application.getCurrentApplication().exit();
+                    }
+                }
+
+                wsServer.onopen = function () {
+                    wsServer.send(JSON.stringify({
+                        e: 'launch'
+                    }));
+                };
+
+                setTimeout(function () {
+                    document.getElementById('text').innerText = 'Timed out in 10 seconds.';
+                }, 10000);
             }
-
-            wsServer.onopen = function () {
-                wsServer.send(JSON.stringify({
-                    e: 'launch'
-                }));
-            };
-
-            setTimeout(function () {
-                document.getElementById('text').innerText = 'Timed out in 10 seconds.';
-            }, 10000);
         }
+        connect_to_server();
     </script>
 </body>
 
