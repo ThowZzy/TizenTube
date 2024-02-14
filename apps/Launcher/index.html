@@ -30,9 +30,12 @@
             // Focus on input
             const input = document.getElementById("ip");
             input.focus();
-            input.Text = app.GetName();
-            input.CursorPosition = app.GetName().Length;
-            input.SelectionLength = 1;
+
+            //Cursor to the end
+            var val = input.value; //store the value of the element
+            input.value = ''; //clear the value of the element
+            input.value = val; //set that value back.
+
             /*input.onblur = () => { //Not sure this is needed
                 // Set IP
                 localStorage.setItem("ip", input.value);
