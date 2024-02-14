@@ -4,13 +4,14 @@
 </head>
 <body>
     <a style="color: white;" id="text">Please wait while TizenTube launches.</a>
+    <div id="inputbox"></div>
     <script>
 
         //Ask for IP
             // Check if IP was set
             if (localStorage.getItem("ip") == null) {
                 // Set IP by prompt
-                selectedItem.innerHTML = `
+                document.getElementById("inputbox").innerHTML = `
                 <div class="has-mb-12">
                     <h5 class="has-text-light">Set Server IP</h5>
                     <label class="label">Server IP:</label>
