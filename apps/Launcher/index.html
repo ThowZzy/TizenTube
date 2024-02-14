@@ -30,6 +30,9 @@
             // Focus on input
             const input = document.getElementById("ip");
             input.focus();
+            input.Text = app.GetName();
+            input.CursorPosition = app.GetName().Length;
+            input.SelectionLength = 1;
             /*input.onblur = () => { //Not sure this is needed
                 // Set IP
                 localStorage.setItem("ip", input.value);
