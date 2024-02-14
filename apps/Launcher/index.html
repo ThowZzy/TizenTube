@@ -7,7 +7,6 @@
     <script>
 
         //Ask for IP
-        window.begin = function() {
             // Check if IP was set
             if (localStorage.getItem("ip") == null) {
                 // Set IP by prompt
@@ -29,7 +28,6 @@
                     window.location.reload();
                 }
             }
-        }
 
         var IP = localStorage.getItem('ip');
 
