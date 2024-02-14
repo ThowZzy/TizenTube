@@ -8,6 +8,16 @@
     <div id="inputbox"></div>
     <script>
 
+document.onkeydown = e => {
+    switch (e.keyCode) {
+        case 65376:
+                var input = document.getElementById("ip");
+                localStorage.setItem("ip", input.value);
+                alert("Set IP to " + input.value);
+                window.location.reload();
+        }
+    };
+
             // Check if IP was set
         if (localStorage.getItem("ip") == null) {
             // Set IP by prompt
@@ -21,13 +31,13 @@
             // Focus on input
             const input = document.getElementById("ip");
             input.focus();
-            input.onblur = () => {
+            /*input.onblur = () => {
                 // Set IP
                 localStorage.setItem("ip", input.value);
                 alert("Set IP to " + input.value);
                 // Reload page
                 window.location.reload();
-            }
+            }*/
         }
         else{
 
@@ -52,9 +62,9 @@
             }));
         };
 
-        //setTimeout(function() {
-         //   document.getElementById('text').innerText = 'Timed out in 10 seconds.';
-        //}, 10000);
+        setTimeout(function() {
+            document.getElementById('text').innerText = 'Timed out in 10 seconds.';
+        }, 10000);
         }
     </script>
 </body>
