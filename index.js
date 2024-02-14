@@ -19,7 +19,7 @@ function createAdbConnection(tv_ip) {
     adb._stream.on('connect', () => {
         console.log('ADB connection established');
         //Launch app
-        const shellCmd = adb.createStream(`shell:0 debug ${tv_ip}${Config.isTizen3 ? ' 0' : ''}`);
+        const shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
         shellCmd.on('data', data => {
             const dataString = data.toString();
             if (dataString.includes('debug')) {
