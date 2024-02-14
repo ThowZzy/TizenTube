@@ -1,0 +1,95 @@
+name: Build New Release
+
+on:
+  repository_dispatch:
+    types: [build_new_release]
+
+  workflow_dispatch:
+  
+env:
+  TIZEN_STUDIO_VER: 4.5.1
+  TIZEN_STUDIO_URL: https://download.tizen.org/sdk/Installer/tizen-studio_$TIZEN_STUDIO_VER/web-cli_Tizen_Studio_$TIZEN_STUDIO_VER_ubuntu-64.bin
+  TIZEN_STUDIO_FILE: web-cli_Tizen_Studio_$TIZEN_STUDIO_VER_ubuntu-64.bin
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: env
+      
+      - name: 'Checkout'
+        uses: actions/checkout@v1
+        
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: '>=14'
+          
+      - name: Install Yarn
+        run: npm install --global yarn
+          
+      - name: Install Needed packages
+        run: sudo apt install expect
+      
+      - name: Download Tizen-Studio
+        run: |
+          curl -o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
+
+      - name: Install Tizen-Studio
+        run: |
+          chmod +x tizen-installer
+          ./tizen-installer --accept-license "${GITHUB_WORKSPACE}/tizen-studio"
+          rm ./tizen-installer
+          echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
+          
+      - name: Prepare Tizen Certificate
+        run: |
+          ./tizen-studio/tools/ide/bin/tizen certificate -a Tizenbrew -p 1234 -c NZ -s Aukland -ct Aukland -o Tizen -n Tizenbrew -e tizenbrew@example.org -f tizencert
+          ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Tizenbrew -a "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.p12" -p 1234
+          ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+          chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+    
+      - name: Clone Tizenbrew
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'reisxd/TizenBrew'
+          platform: 'github'
+          path: 'tizenbrew-repo'
+
+      - name: Build
+        run: |
+          mv tizenbrew-repo/tizenbrew-app/TizenBrew .
+          cd TizenBrew
+          DISCARD_UNUSED_FONTS=1
+          ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+
+      - name: Prepare for password prompt
+        run: |
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          
+      - name: Package WGT
+        run: |
+          expect ./package.exp
+
+      - name: Print logs
+        if: always()
+        run: cat ./tizen-studio-data/cli/logs/cli.log
+        
+      - name: List All Files
+        if: always()
+        run: ls -R
+          
+      - name: Release Build Result
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: Latest
+          files: |
+            TizenBrew/release/TizenBrew.wgt
+          body: "test"
