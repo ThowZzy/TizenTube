@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <a id="text">Please wait while TizenTube launches.</a>
+    <a id="text", style="font-size: 40px;">Please wait while TizenTube launches.</a>
     <div id="inputbox"></div>
     <script>
         //Store IP once hitting the key "finish"
@@ -47,6 +47,7 @@
         function connect_to_server() {
             // Check if IP was set
             if (localStorage.getItem("ip") == null) {
+                document.getElementById('text').innerText = 'Waiting for the IP of the server..';
                 // Set IP by prompt
                 prompt_for_ip();
                 return;
@@ -56,7 +57,7 @@
                 try {
                     wsServer = new WebSocket('ws://' + IP + ':3000');
                 } catch (e) {
-                    document.getElementById('text').innerText = 'Could not connect.';
+                    document.getElementById('text').innerText = 'Could not connect to server.. Check if it is running and submit again its IP.';
                     prompt_for_ip(IP);
                     return;
                 }
@@ -75,7 +76,7 @@
                 };
 
                 setTimeout(function () {
-                    document.getElementById('text').innerText = 'Timed out in 10 seconds.';
+                    document.getElementById('text').innerText = 'Could not connect to server after 10 seconds.. Check if it is running and submit again its IP.';
                     prompt_for_ip(IP);
                     return;
                 }, 10000);
