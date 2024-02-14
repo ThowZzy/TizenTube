@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
-    <a style="color: white;" id="text">Please wait while TizenTube launches.</a>
+    <a id="text">Please wait while TizenTube launches.</a>
     <div id="inputbox"></div>
     <script>
 
-document.onkeydown = e => {
-    switch (e.keyCode) {
-        case 65376:
-                var input = document.getElementById("ip");
-                localStorage.setItem("ip", input.value);
-                alert("Set IP to " + input.value);
-                window.location.reload();
-        }
-    };
+        document.onkeydown = e => {
+            switch (e.keyCode) {
+                case 65376:
+                    var input = document.getElementById("ip");
+                    localStorage.setItem("ip", input.value);
+                    alert("Set IP to " + input.value);
+                    window.location.reload();
+            }
+        };
 
-            // Check if IP was set
+        // Check if IP was set
         if (localStorage.getItem("ip") == null) {
             // Set IP by prompt
             document.getElementById("inputbox").innerHTML = `
@@ -39,33 +41,34 @@ document.onkeydown = e => {
                 window.location.reload();
             }*/
         }
-        else{
+        else {
 
-        var IP = localStorage.getItem('ip');
+            var IP = localStorage.getItem('ip');
 
-        var wsServer;
-        try {
-        	wsServer = new WebSocket('ws://' + IP + ':3000');
-        } catch (e) {
-        	document.getElementById('text').innerText = 'Could not connect.';
-        }
-        wsServer.onmessage = function (message) {
-            const msg = JSON.parse(message.data);
-            if (msg.ok) {
-                tizen.application.getCurrentApplication().exit();
+            var wsServer;
+            try {
+                wsServer = new WebSocket('ws://' + IP + ':3000');
+            } catch (e) {
+                document.getElementById('text').innerText = 'Could not connect.';
             }
-        }
+            wsServer.onmessage = function (message) {
+                const msg = JSON.parse(message.data);
+                if (msg.ok) {
+                    tizen.application.getCurrentApplication().exit();
+                }
+            }
 
-        wsServer.onopen = function () {
-            wsServer.send(JSON.stringify({
-                e: 'launch'
-            }));
-        };
+            wsServer.onopen = function () {
+                wsServer.send(JSON.stringify({
+                    e: 'launch'
+                }));
+            };
 
-        setTimeout(function() {
-            document.getElementById('text').innerText = 'Timed out in 10 seconds.';
-        }, 10000);
+            setTimeout(function () {
+                document.getElementById('text').innerText = 'Timed out in 10 seconds.';
+            }, 10000);
         }
     </script>
 </body>
+
 </html>
