@@ -32,7 +32,7 @@ After completing these steps, installing apps is complete! You should be able to
 4. Install mods modules by running `cd mods` and then running `npm i`.
 5. Build mods by running `npm run build`.
 6. Navigate back to the main folder of the repository by running `cd ..`.
-7. Open `config.json` in your favorite text editor. Change `tvIP` to the IP of your TV. Make sure to leave the `appID` as it is (`Ad6NutHP8l.TizenTube`). Change `isTizen3` to true if your TV runs on Tizen 3.
+7. Open `config.json` in your favorite text editor. Make sure to leave the `appID` as it is (`Ad6NutHP8l.TizenTube`). Change `isTizen3` to true if your TV runs on Tizen 3.
 8. Ensure that SDB is not running by going to Tizen's device manager and disconnecting your TV.
 9. Change the development IP address on the TV (if not already done from step 3 of Installation steps), to the IP of this PC that you'll run the node server on.
 10. Start the node debugger/server using `node .`.

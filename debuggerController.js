@@ -4,12 +4,12 @@ import { readFileSync } from 'node:fs';
 import Config from './config.json' assert { type: 'json' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-async function startDebugging(port, adb_conn) {
+async function startDebugging(port, adb_conn, tv_ip) {
     // Sleep to get the app to load.
     // For some reason, without it, using the launcher gives an error
     await sleep(5000)
     try {
-        const debuggerJsonReq = await nodeFetch(`http://${Config.tvIP}:${port}/json`);
+        const debuggerJsonReq = await nodeFetch(`http://${tv_ip}:${port}/json`);
         const debuggerJson = await debuggerJsonReq.json();
         return attachDebugger(debuggerJson[0].webSocketDebuggerUrl, adb_conn);
     } catch (error) {
