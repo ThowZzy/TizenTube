@@ -1,13 +1,21 @@
 {
-  "name": "@foxreis/tizentube",
+  "name": "tizentube",
   "version": "1.0.0",
-  "description": "TizenTube is an ad-free and sponsor-free solution for your favourite streaming website on your Tizen (Samsung) TVs.",
-  "packageType": "mods",
-  "websiteURL": "https://youtube.com/tv",
-  "main": "dist/userScript.js",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
   "author": "Reis Can",
   "repository": {
     "url": "https://github.com/reisxd/TizenTube"
   },
-  "license": "GPL-3.0-only"
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "adbhost": "^0.0.2",
+    "node-fetch": "^3.3.1",
+    "ws": "^8.13.0"
+  }
 }
