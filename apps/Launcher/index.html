@@ -56,9 +56,9 @@
                 }
                 wsServer.onmessage = function (message) {
                     const msg = JSON.parse(message.data);
-                    if (msg.ok) {
-                        tizen.application.getCurrentApplication().exit();
-                    }
+                    //if (msg.ok) {
+                    //    tizen.application.getCurrentApplication().exit();
+                    //}
                 }
 
                 wsServer.onopen = function () {
