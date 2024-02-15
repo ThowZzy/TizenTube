@@ -1,5 +1,9 @@
 :root {
-    color-scheme: light dark;
+    color-scheme: dark;
+}
+
+*{
+    color: white;
 }
 
 #text {
