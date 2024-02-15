@@ -47,12 +47,15 @@ function connect_to_server() {
             prompt_for_ip(IP);
             return;
         }
+        var got_ok = false;
         wsServer.onmessage = function (message) {
             const msg = JSON.parse(message.data);
             if (msg.ok) { //Improve here: SDB connection can still fail here if TV Developer IP isn't right 
-                          //-> Catch this and ask user to change it (can also happen if an sdb conn already exists)
-                tizen.application.getCurrentApplication().exit();
-                return;
+                //-> Catch this and ask user to change it (can also happen if an sdb conn already exists)
+                //tizen.application.getCurrentApplication().exit();
+                //return;
+                got_ok = true;
+                //Experimental code to address the issue
             }
         }
 
@@ -64,6 +67,9 @@ function connect_to_server() {
 
         setTimeout(function () {
             document.getElementById('text').innerText = 'Could not connect to server after 10 seconds.. Check if it is running and submit again its IP.';
+            if (got_ok) {
+                document.getElementById('additionnal-text').innerText = "If you see this message : Connection with the server was successful but the ADB connection failed, you likely did not change the TV's developer IP to your server's. OR you still have an active connection to your TV with tizen device manager.";
+            }
             prompt_for_ip(IP);
             return;
         }, 10000);
