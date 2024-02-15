@@ -6,84 +6,9 @@
 </head>
 
 <body>
-    <a id="text", style="font-size: 40px;">Please wait while TizenTube launches.</a>
+    <h1 id="text">Please wait while TizenTube launches.</h1>
     <div id="inputbox"></div>
-    <script>
-        //Store IP once hitting the key "finish"
-        document.onkeydown = e => {
-            if (e.keyCode == 65376) {
-                var input = document.getElementById("ip");
-                localStorage.setItem("ip", input.value);
-                alert("Set IP to " + input.value);
-                window.location.reload();
-            }
-        };
-
-        function prompt_for_ip(previous_IP = "192.168.1.10") {
-            document.getElementById("inputbox").innerHTML = `
-            <div class="has-mb-12">
-                <h5 class="has-text-light">Set Server IP</h5>
-                <label class="label">Server IP:</label>
-                <input type="text" class="input" placeholder="IP Address" value="${previous_IP}" id="ip">
-            </div>
-            `;
-            // Focus on input
-            const input = document.getElementById("ip");
-            input.focus();
-
-            //Cursor to the end
-            var val = input.value; //store the value of the element
-            input.value = ''; //clear the value of the element
-            input.value = val; //set that value back.
-
-            /*input.onblur = () => { //Not sure this is needed
-                // Set IP
-                localStorage.setItem("ip", input.value);
-                alert("Set IP to " + input.value);
-                // Reload page
-                window.location.reload();
-            }*/
-        }
-        function connect_to_server() {
-            // Check if IP was set
-            if (localStorage.getItem("ip") == null) {
-                document.getElementById('text').innerText = 'Waiting for the IP of the server..';
-                // Set IP by prompt
-                prompt_for_ip();
-                return;
-            } else {
-                var IP = localStorage.getItem('ip');
-                var wsServer;
-                try {
-                    wsServer = new WebSocket('ws://' + IP + ':3000');
-                } catch (e) {
-                    document.getElementById('text').innerText = 'Could not connect to server.. Check if it is running and submit again its IP.';
-                    prompt_for_ip(IP);
-                    return;
-                }
-                wsServer.onmessage = function (message) {
-                    const msg = JSON.parse(message.data);
-                    if (msg.ok) {
-                        tizen.application.getCurrentApplication().exit();
-                        return;
-                    }
-                }
-
-                wsServer.onopen = function () {
-                    wsServer.send(JSON.stringify({
-                        e: 'launch'
-                    }));
-                };
-
-                setTimeout(function () {
-                    document.getElementById('text').innerText = 'Could not connect to server after 10 seconds.. Check if it is running and submit again its IP.';
-                    prompt_for_ip(IP);
-                    return;
-                }, 10000);
-            }
-        }
-        connect_to_server();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
