@@ -2,18 +2,21 @@
     color-scheme: dark;
 }
 
-*{
-    color: white;
-}
-
 #text {
     font-size: 40px;
+    color: white;
 }
 
 #text2 {
     font-size: 30px;
+    color: white;
 }
 
 .label {
+    font-size: 25px;
+    color: white;
+}
+
+.input {
     font-size: 25px;
 }
