@@ -4,6 +4,10 @@ TizenTube is a NodeJS script that enhances your Tizen TV (2017 and newer) viewin
 
 [Discord Server Invite](https://discord.gg/m2P7v8Y2qR)
 
+# TizenTube-Legacy ?
+
+This fork follows another development path than the original TizenTube, the original now uses TizenBrew. But I liked the TizenTube only project so I brought it back with the improvements I personally wanted.
+
 ## How it works
 
 TizenTube operates by initiating a debugger session upon launching the app on your Tizen TV. This is achieved through the utilization of the `debug <app.id>` command, which establishes a connection between the server and the debugger. Once connected, the server is able to transmit JavaScript code that effectively removes video ads.
@@ -62,3 +66,8 @@ And now you can launch TizenTube from your Android device!
 4. Done
 
 Now, everytime you want to watch youtube, start the launcher and it will launch an ad-less youtube.
+
+#FAQ
+
+Q: How can I fix videos stuttering every 1 second ?
+A: Bring up the video speed settings (BLUE button from remote) and select the speed to 1.0001x. This should fix the stutters.
