@@ -18,9 +18,12 @@ TizenTube operates by initiating a debugger session upon launching the app on yo
 ## Installation Steps
 
 1. Download both wgt files from [releases](https://github.com/ThowZzy/TizenTube-AIO/releases).
-2. Install these to your TV following [this guide](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md).
-Note: Docker install from this guide will be available later.
-3. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.
+2. Install these to your TV following [this guide](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md).  
+   Note: You don't NEED tizen studio CLI, the full version also works.  
+   The tizen executable should be in `C:\tizen-studio\tools\ide\bin`
+4. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.
+
+Note: Docker install of WGT files like jellyfin tizen will be available later.
 
 After completing these steps, installing apps is complete! You should be able to see the apps on your TV. Now comes the easier part, installing the server or the debugger. You have two options to do this:
 
