@@ -55,7 +55,6 @@ jobs:
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
-          generate_release_notes: true
           tag_name: apk
           files: |
             androidApp/app/build/outputs/apk/debug/app-armeabi-v7a-debug.apk
