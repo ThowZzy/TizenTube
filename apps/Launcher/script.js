@@ -10,7 +10,7 @@ document.onkeydown = e => {
 
 function prompt_for_ip(previous_IP = "192.168.1.10") {
     document.getElementById("inputbox").innerHTML = `
-    <h2 id="text2">Set Server IP which is running the node server.</h2>
+    <h2 id="text2">Set Server IP which is running the node server. (Press OK to open the keyboard)</h2>
     <label class="label">Server IP:</label>
     <input type="text" class="input" placeholder="IP Address" id="ip">
     `;
