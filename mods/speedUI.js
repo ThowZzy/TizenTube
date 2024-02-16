@@ -37,13 +37,13 @@ speedUIContainer.addEventListener(
                 navigate(ARROW_KEY_CODE[evt.keyCode]);
             } else if (evt.keyCode === 13 || evt.keyCode === 32) {
                 // "OK" button
-               if (selectedItem) {
+                if (selectedItem) {
                     selectedItem.checked = true;
                     const speed = document.querySelector('input[name="speed"]:checked').value;
                     configWrite('videoSpeed', speed);
                     currentSpeed = speed;
                     document.getElementsByTagName('video')[0].playbackRate = currentSpeed;
-               }
+                }
             } else if (evt.keyCode === 27) {
                 // Back button
                 speedUIContainer.style.display = 'none';
@@ -72,6 +72,15 @@ for (let speed = increment; speed <= maxSpeed; speed += increment) {
     speedUIContainer.innerHTML += `
     <label for="${speedId}"><input type="radio" id="${speedId}" name="speed" value="${speed}">${speed}x</label>
     `;
+    //Additional speed option to fix videos stuttering
+    if (speed == 1) {
+        speed = 1.0001;
+        const speedId = `speed${speed.toString().replace('.', '_')}`;
+        speedUIContainer.innerHTML += `
+        <label for="${speedId}"><input type="radio" id="${speedId}" name="speed" value="${speed}">${speed}x</label>
+        `;
+        speed = 1;
+    }
 }
 
 document.querySelector('body').appendChild(speedUIContainer);
