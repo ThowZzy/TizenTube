@@ -277,7 +277,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onOpen(ServerHandshake handshakedata) {
-                wsClient.send("{\"e\": \"launch\"}");
+                JSONObject object = readConfig();
+                String TV_IP = object.getString("tvIP");
+                sClient.send("{\"e\": \"android\", \"tv_ip\": \"" + TV_IP + "\"}");
             }
 
             @Override
