@@ -57,9 +57,14 @@ wss.on('connection', ws => {
                 ws.send(JSON.stringify({
                     ok: true
                 }));
-                const tv_ip = ws._socket.remoteAddress;
-                createAdbConnection(tv_ip);
-
+                createAdbConnection(ws._socket.remoteAddress);
+                break;
+            }
+            case 'android': {
+                ws.send(JSON.stringify({
+                    ok: true
+                }));
+                createAdbConnection(msg.tv_ip);
                 break;
             }
             default: {
