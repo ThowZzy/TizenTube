@@ -77,4 +77,4 @@ function connect_to_server() {
     }
 }
 
-connect_to_server();
+document.addEventListener("DOMContentLoaded", connect_to_server);
