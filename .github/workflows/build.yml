@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - v*.*.*
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,7 +25,7 @@ jobs:
 
       - name: Clone TizenTube assets
         working-directory: androidApp/app/src/main/assets
-        run: git clone https://github.com/reisxd/TizenTube.git tizentube
+        run: git clone https://github.com/ThowZzy/TizenTube-Legacy.git tizentube
 
       - name: Install TizenTube modules
         working-directory: androidApp/app/src/main/assets/tizentube
