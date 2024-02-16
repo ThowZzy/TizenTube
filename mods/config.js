@@ -8,7 +8,7 @@ const defaultConfig = {
   enableSponsorBlockInteraction: true,
   enableSponsorBlockSelfPromo: true,
   enableSponsorBlockMusicOfftopic: true,
-  videoSpeed: 1
+  videoSpeed: 1.0001
 };
 
 let localConfig;
