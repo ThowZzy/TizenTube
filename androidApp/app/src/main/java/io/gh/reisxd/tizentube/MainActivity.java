@@ -279,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
             public void onOpen(ServerHandshake handshakedata) {
                 JSONObject object = readConfig();
                 String TV_IP = object.getString("tvIP");
-                sClient.send("{\"e\": \"android\", \"tv_ip\": \"" + TV_IP + "\"}");
+                wsClient.send("{\"e\": \"android\", \"tv_ip\": \"" + TV_IP + "\"}");
             }
 
             @Override
