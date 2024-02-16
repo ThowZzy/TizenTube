@@ -16,6 +16,7 @@ function prompt_for_ip(previous_IP = "192.168.1.10") {
     `;
     // Focus on input
     const input = document.getElementById("ip");
+    input.blur();
     input.focus();
 
     //Pre-fill with the previous IP or the default one
