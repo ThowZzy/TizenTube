@@ -67,7 +67,7 @@ And now you can launch TizenTube from your Android device!
 
 Now, everytime you want to watch youtube, start the launcher and it will launch an ad-less youtube.
 
-#FAQ
+# FAQ
 
-Q: How can I fix videos stuttering every 1 second ?
+Q: How can I fix videos stuttering every 1 second ?  
 A: Bring up the video speed settings (BLUE button from remote) and select the speed to 1.0001x. This should fix the stutters.
