@@ -56,7 +56,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
-          tag_name: ${{ env.RELEASE_VERSION }}
+          tag_name: apk
           files: |
             androidApp/app/build/outputs/apk/debug/app-armeabi-v7a-debug.apk
             androidApp/app/build/outputs/apk/debug/app-arm64-v8a-debug.apk
