@@ -12,6 +12,6 @@ echo:
 set /p userInput="Copy the name of the TV and paste it HERE (example: UE43AU7090UXXN) : "
 
 cd ide\bin
-tizen install -n %tizen-dir%\Launcher.wgt -t %userInput%
-tizen install -n %tizen-dir%\TizenTube.wgt -t %userInput%
+start cmd /k tizen install -n %tizen-dir%\Launcher.wgt -t %userInput%
+start cmd /k tizen install -n %tizen-dir%\TizenTube.wgt -t %userInput%
 pause
