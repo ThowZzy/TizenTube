@@ -21,11 +21,13 @@ TizenTube operates by initiating a debugger session upon launching the app on yo
 
 ## Installation Steps
 
-1. [Download Tizen Studio](https://developer.tizen.org/development/tizen-studio/download) with CLI or GUI (CLI is good enough).
-2. [Enable developer mode](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html) on the TV and put the IP of your PC in the developer settings.  
-3. Connect your PC to the TV using the device manager tool located in ``C:\tizen-studio\tools\device-manager\bin\device-ui-3.0.jar``. You need to add the TV by supplying its IP and check the toggle ON to connect.  
-4. Execute the [script I made](https://github.com/ThowZzy/TizenTube-Legacy/blob/main/install-wgt.bat). Remember to edit the path of tizen studio if you didn't let it as default (C:\tizen-studio).  
-5. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.  
+1. [Download and install Tizen Studio](https://developer.tizen.org/development/tizen-studio/download) "CLI" or "GUI" version (CLI is good enough).
+2. [Enable developer mode](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html) on the TV and put the IP of your PC in the developer settings. 
+   <img src="https://github.com/ThowZzy/TizenTube-Legacy/blob/main/.github/images/tv-developer-settings.jpg" alt="drawing" width="500"/>  
+4. Connect your PC to the TV using the device manager tool located in ``C:\tizen-studio\tools\device-manager\bin\device-ui-3.0.jar``. You need to add the TV by supplying its IP and check the toggle ON to connect.  
+   <img src="https://github.com/ThowZzy/TizenTube-Legacy/blob/main/.github/images/connect-to-tv.png" alt="drawing" width="600"/>  
+6. Execute the [script I made](https://github.com/ThowZzy/TizenTube-Legacy/blob/main/install-wgt.bat). Remember to edit the path of tizen studio if you didn't let it as default (C:\tizen-studio).  
+7. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.  
 
 After completing these steps, installing apps is complete! You should be able to see the apps on your TV. Now comes the easier part, installing the server or the debugger. You have two options to do this:
 
