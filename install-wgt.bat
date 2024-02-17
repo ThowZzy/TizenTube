@@ -4,7 +4,7 @@
 set tizen-dir=C:\tizen-studio
 
 ::URL to download wgt files
-set url=https://github.com/ThowZzy/TizenTube-Legacy/releases/tag/latest
+set url=https://github.com/ThowZzy/TizenTube-Legacy/releases/download/latest/
 
 ::This line goes to the same drive as tizen studio (if launching from another drive)
 %tizen-dir:~0,1%:
@@ -13,8 +13,8 @@ echo:
 echo =================== WGT Download =====================
 echo Downloading wgt files from releases...
 echo:
-curl "%url%/Launcher.wgt" -o "%tizen-dir%/Launcher.wgt"
-curl "%url%/TizenTube.wgt" -o "%tizen-dir%/TizenTube.wgt"
+curl -L "%url%/Launcher.wgt" -o "%tizen-dir%/Launcher.wgt"
+curl -L "%url%/TizenTube.wgt" -o "%tizen-dir%/TizenTube.wgt"
 echo =======================================================
 
 echo:
@@ -24,16 +24,14 @@ sdb devices
 echo =======================================================
 
 echo:
-echo If you can't see a device list above, open this : %tizen-dir%\tools\device-manager\bin\device-ui-3.0.jar and connect to your TV and rerun the script.
+echo If you can't see your tv in the device list above, open this : %tizen-dir%\tools\device-manager\bin\device-ui-3.0.jar and connect to your TV and rerun the script.
 echo:
-
-set /p userInput="Copy the name of the TV from the list and paste it HERE (example: UE43AU7090UXXN) : "
 
 echo:
 echo =========== Installing applications to the TV ===========
 cd ide\bin
-call tizen install -n %tizen-dir%\Launcher.wgt -t %userInput%
-call tizen install -n %tizen-dir%\TizenTube.wgt -t %userInput%
+call tizen install -n %tizen-dir%\Launcher.wgt
+call tizen install -n %tizen-dir%\TizenTube.wgt
 echo =========================================================
 
 echo:
