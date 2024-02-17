@@ -24,10 +24,10 @@ TizenTube operates by initiating a debugger session upon launching the app on yo
 1. [Download and install Tizen Studio](https://developer.tizen.org/development/tizen-studio/download) "CLI" or "GUI" version (CLI is good enough).
 2. [Enable developer mode](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html) on the TV and put the IP of your PC in the developer settings. 
    <img src="https://github.com/ThowZzy/TizenTube-Legacy/blob/main/.github/images/tv-developer-settings.jpg" alt="drawing" width="500"/>  
-4. Connect your PC to the TV using the device manager tool located in ``C:\tizen-studio\tools\device-manager\bin\device-ui-3.0.jar``. You need to add the TV by supplying its IP and check the toggle ON to connect.  
+3. Connect your PC to the TV using the device manager tool located in ``C:\tizen-studio\tools\device-manager\bin\device-ui-3.0.jar``. You need to add the TV by supplying its IP and check the toggle ON to connect.  
    <img src="https://github.com/ThowZzy/TizenTube-Legacy/blob/main/.github/images/connect-to-tv.png" alt="drawing" width="600"/>  
-6. Execute the [script I made](https://github.com/ThowZzy/TizenTube-Legacy/blob/main/install-wgt.bat). Remember to edit the path of tizen studio if you didn't let it as default (C:\tizen-studio).  
-7. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.  
+4. Execute the [script I made](https://github.com/ThowZzy/TizenTube-Legacy/blob/main/install-wgt.bat). Remember to edit the path of tizen studio if you didn't let it as default (C:\tizen-studio).  
+5. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.  
 
 After completing these steps, installing apps is complete! You should be able to see the apps on your TV. Now comes the easier part, installing the server or the debugger. You have two options to do this:
 
@@ -41,7 +41,7 @@ After completing these steps, installing apps is complete! You should be able to
 6. Navigate back to the main folder of the repository by running `cd ..`.
 7. Open `config.json` in your favorite text editor. Make sure to leave the `appID` as it is (`Ad6NutHP8l.TizenTube`). Change `isTizen3` to true if your TV runs on Tizen 3.
 8. Ensure that SDB is not running by going to Tizen's device manager and disconnecting your TV.
-9. Change the development IP address on the TV (if not already done from step 3 of Installation steps), to the IP of this PC that you'll run the node server on.
+9. Change the development IP address on the TV (if not already done from step 5 of Installation steps), to the IP of this PC that you'll run the node server on.
 10. Start the node debugger/server using `node .`.
 
 Once the server is up and running, you can access the Launcher app from your TVâ€™s app menu. See "How to launch TizenTube ?".
@@ -52,7 +52,7 @@ Once the server is up and running, you can access the Launcher app from your TVâ
 2. Download the latest APK compatible with your device's architecture from [here](https://github.com/reisxd/TizenTube/releases/latest) (if unsure, download armeabi-v7a).
 3. Install it.
 4. After opening the app, change the configuration to suit your needs. Ensure that you set the `appID` to `Ad6NutHP8l.TizenTube` if it isn't already set. Change the IP to match that of your TV.
-5. Change the development IP address on the TV (previously set in step 1 of Installation Steps) to that of this Android device which you'll run the server on.
+5. Change the development IP address on the TV (if not already done from step 5 of Installation steps) to that of this Android device which you'll run the server on.
 6. Press 'Run Server'.
 7. Press 'Launch' whenever you want to launch TizenTube.
 8. Please note that if the app crashes, you may have made an error, such as setting an incorrect IP or failing to change the Developer Mode's Host IP.
