@@ -21,13 +21,11 @@ TizenTube operates by initiating a debugger session upon launching the app on yo
 
 ## Installation Steps
 
-1. Download both wgt files from [releases](https://github.com/ThowZzy/TizenTube-AIO/releases).
-2. Install these to your TV following [this guide](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md).  
-   Note: You don't NEED tizen studio CLI, the full version also works.   
-   You can execute the [script I made](https://github.com/ThowZzy/TizenTube-Legacy/blob/main/install-wgt.bat) (right after installing Tizen Studio and changing the TV's DEV IP) to make the installation process even easier. Remember to edit the path of tizen studio if needed and to drop the two wgt files in the Tizen Studio folder (C:\tizen-studio).
-4. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.
-
-Note: Docker install of WGT files like jellyfin tizen will be available later.
+1. [Download Tizen Studio](https://developer.tizen.org/development/tizen-studio/download) with CLI or GUI (CLI is good enough).
+2. [Enable developer mode](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html) on the TV and put the IP of your PC in the developer settings.  
+3. Connect your PC to the TV using the device manager tool located in ``C:\tizen-studio\tools\device-manager\bin\device-ui-3.0.jar``. You need to add the TV by supplying its IP and check the toggle ON to connect.  
+4. Execute the [script I made](https://github.com/ThowZzy/TizenTube-Legacy/blob/main/install-wgt.bat). Remember to edit the path of tizen studio if you didn't let it as default (C:\tizen-studio).  
+5. Once both apps are installed to the TV, make sure to change the TV's Developer IP to your PC, Single Board Computer or your android phone's IP which will run the server.  
 
 After completing these steps, installing apps is complete! You should be able to see the apps on your TV. Now comes the easier part, installing the server or the debugger. You have two options to do this:
 
