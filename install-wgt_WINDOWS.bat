@@ -18,14 +18,15 @@ curl -L "%url%/TizenTube.wgt" -o "%tizen-dir%/TizenTube.wgt"
 echo =======================================================
 
 echo:
-echo ============= Listing of connected devices ============
-cd %tizen-dir%\tools
-sdb devices
-echo =======================================================
+set /p userInput="Type here the IP of your TV (make sure you did step 2 before) : "
+echo:
 
 echo:
-echo If you can't see your tv in the device list above, open this : %tizen-dir%\tools\device-manager\bin\device-ui-3.0.jar and connect to your TV and rerun the script.
-echo:
+echo ================= Connecting to the TV ================
+cd %tizen-dir%\tools
+sdb connect %userInput%
+sdb devices
+echo =======================================================
 
 echo:
 echo =========== Installing applications to the TV ===========
