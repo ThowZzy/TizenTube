@@ -50,39 +50,42 @@ Once the server is up and running, you can access the Launcher app from your TVâ
 2. After opening the app, change the configuration to suit your needs. Ensure that you set the `appID` to `Ad6NutHP8l.TizenTube` if it isn't already set. Change the IP to match that of your TV. Change `isTizen3` to true ONLY if your TV runs on Tizen 3.
 3. Change the development IP address on the TV (if not already done from step 4 of Installation steps) to that of this Android device which you'll run the server on.
 4. Press 'Run Server'.
-5. Press 'Launch' whenever you want to launch TizenTube.
-6. Please note that if the app crashes, you may have made an error, such as setting an incorrect IP or failing to change the Developer Mode's Host IP.
 
-And now you can launch TizenTube from your Android device!
-
-### How to launch TizenTube ?
-1. Pin the "Launcher" application with the modified youtube logo to your quick launch. (optionnal)
-2. Start the launcher app.
-3. Enter the IP of the server, hit finish.
-4. Done
-
-Now, everytime you want to watch youtube, start the launcher and it will launch an ad-less youtube.
+And now you can launch TizenTube from your Android device! See "How to launch TizenTube ?".
 
 # F.A.Q
 
-### The launcher cannot connect to the server ?  
+## How to launch TizenTube ?
+### Option #1 (node server on PC/SBC)
+1. Pin the "Launcher" application with the modified youtube logo to your quick launch. (optionnal)
+2. Start the launcher app.
+3. Enter the IP of the server, hit finish.
+4. Done  
+
+Now, everytime you want to watch youtube, start the launcher and it will launch an ad-less youtube.  
+### Option #2 (android app server)
+1. Press 'Launch' whenever you want to launch TizenTube.
+2. Please note that if the app crashes, you may have made an error, such as setting an incorrect IP or failing to change the Developer Mode's Host IP.  
+
+Note that you also can use the Launcher app from the TV to launch TizenTube after you pressed 'Run Server'.
+## The launcher cannot connect to the server ?  
 - Check if you entered the right IP and that the node server is running.  
 - Check if your server (raspberry pi for example) has the port 3000 opened (or the port you configured).  
 
-### The launcher can connect to the server but TizenTube doesn't load ?  
+## The launcher can connect to the server but TizenTube doesn't load ?  
 - You might need to try with and without the "isTizen3" option of the server.  
 - Check if the IP set in TV's developer option is the right IP of your server.  
 
-### Your videos are stuttering every 1 second ?  
+## Your videos are stuttering every 1 second ?  
 - First check if you have the latest version of the node server or the latest APK.  
 - If you changed the video speed to "1x" you need to change it again to "1.0001x" to fix the stutters.
 
-### How do I update the server and the Tizen applications ?
+## How do I update the server and the Tizen applications ?
 - To update the server on Windows/Linux/Mac : Run the command ``git pull`` from the root folder of the repository. And optionnally you should also run ``npm run build`` in /mods folder.
 - To update the server on Android you just have to download the latest APK from the releases.
 - To update the Tizen applications on the TV, you have to first uninstall one or both apps and run the installation script again (see step 3 of installation steps).
 
-### My server (phone, pc, raspberry pi) or my TV changes their IPs, what can I do ?
+## My server (phone, pc, raspberry pi) or my TV changes their IPs, what can I do ?
 - You should be able to reserve IP addresses in the DHCP options of your ISP router, so that you can keep the same IPs.  
   Note that only the android app server is impacted by the TV changing its IP.  
   If you use the regular node server (option #1), only a change of IP of this server would require you to put the new IP in the Launcher and TV's dev options, the TV can have any IP.
