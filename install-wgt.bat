@@ -4,7 +4,7 @@
 set tizen-dir=C:\tizen-studio
 
 ::URL to download wgt files
-set url=https://github.com/ThowZzy/TizenTube-Legacy/releases/download/latest/
+set url=https://github.com/ThowZzy/TizenTube-Legacy/releases/latest/download
 
 ::This line goes to the same drive as tizen studio (if launching from another drive)
 %tizen-dir:~0,1%:
