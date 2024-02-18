@@ -7,28 +7,36 @@ let adb;
 
 async function createAdbConnection(tv_ip) {
     if (adb?._stream) {
-        adb._stream.end();
-        await sleep(200) //Delay to wait for the end of stream
         adb._stream.removeAllListeners('connect');
         adb._stream.removeAllListeners('error');
         adb._stream.removeAllListeners('close');
     }
-    else
-        await sleep(300) //add delay in case tizentube is already started
 
     adb = adbhost.createConnection({ host: tv_ip, port: 26101 });
 
     adb._stream.on('connect', () => {
         console.log('ADB connection established');
-        //Launch app
-        const shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
-        shellCmd.on('data', data => {
-            const dataString = data.toString();
-            if (dataString.includes('debug')) {
-                const port = dataString.substr(dataString.indexOf(':') + 1, 6).replace(' ', '');
-                startDebugging(port, adb, tv_ip);
+
+        //Kill the launcher and TizenTube
+        const kill_job = adb.createStream(`shell:0 was_kill I80YHgsJe2.Launcher`);
+        kill_job.on('data', data1 => {
+            if (data1.toString().includes("spend time")) {
+                const kill_job2 = adb.createStream(`shell:0 was_kill ${Config.appId}`);
+                kill_job2.on('data', data2 => {
+                    if (data2.toString().includes("spend time")) {
+                        //Launch TizenTube in debug mode
+                        const shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
+                        shellCmd.on('data', data => {
+                            const dataString = data.toString();
+                            if (dataString.includes('debug')) {
+                                const port = dataString.substr(dataString.indexOf(':') + 1, 6).replace(' ', '');
+                                startDebugging(port, adb, tv_ip);
+                            }
+                        });
+                    }
+                })
             }
-        });
+        })
     });
 
     adb._stream.on('error', () => {
