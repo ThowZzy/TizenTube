@@ -62,3 +62,17 @@ And now you can launch TizenTube from your Android device!
 4. Done
 
 Now, everytime you want to watch youtube, start the launcher and it will launch an ad-less youtube.
+
+# Troubleshooting
+
+### The launcher cannot connect to the server ?  
+- Check if you entered the right IP and that the node server is running.  
+- Check if your server (raspberry pi for example) has the port 3000 opened (or the port you configured).  
+
+### The launcher can connect to the server but TizenTube doesn't load ?  
+- You might need to try with and without the "isTizen3" option of the server.  
+- Check if the IP set in TV's developer option is the right IP of your server.  
+
+### Your videos are stuttering every 1 second ?  
+- First check if you have the latest version of the node server or the latest APK.  
+- If you changed the video speed to "1x" you need to change it again to "1.0001x" to fix the stutters.
