@@ -73,9 +73,10 @@ function connect_to_server() {
         };
 
         setTimeout(function () {
-            document.getElementById('text').innerText = 'Could not connect to server after 10 seconds.. Check if it is running and submit again its IP.';
             if (got_ok) {
-                document.getElementById('additionnal-text').innerText = "If you see this message : Connection with the server was successful but the ADB connection failed, you likely did not change the TV's developer IP to your server's. OR you still have an active connection to your TV with tizen device manager.";
+                document.getElementById('text').innerText = "Connection with the server was successful but the ADB connection failed... You likely did not change the TV's developer IP to your server's. Or you still have an active connection to your TV with tizen device manager. Or you need to enable/disable the Tizen3 Compatibility.";
+            } else{
+                document.getElementById('text').innerText = 'Could not connect to server after 10 seconds.. Check if it is running and submit again its IP.';
             }
             prompt_for_ip(IP);
             return;
