@@ -19,7 +19,7 @@ read userInput
 echo ""
 
 echo ""
-echo "============= Listing of connected devices ============"
+echo "================= Connecting to the TV ================"
 cd "${tizen_dir}/tools"
 ./sdb connect $userInput
 ./sdb devices
