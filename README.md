@@ -39,7 +39,7 @@ After completing these steps, installing apps is complete! You should be able to
 6. Navigate back to the main folder of the repository by running `cd ..`.
 7. Open `config.json` in your favorite text editor. Make sure to leave the `appID` as it is (`Ad6NutHP8l.TizenTube`). Change `isTizen3` to true if your TV runs on Tizen 3.
 8. Ensure that SDB is not running by going to Tizen's device manager and disconnecting your TV.
-9. Change the development IP address on the TV (if not already done from step 5 of Installation steps), to the IP of this PC that you'll run the node server on.
+9. Change the development IP address on the TV (if not already done from step 4 of Installation steps), to the IP of this PC that you'll run the node server on.
 10. Start the node debugger/server using `node .`.
 
 Once the server is up and running, you can access the Launcher app from your TVâ€™s app menu. See "How to launch TizenTube ?".
@@ -48,7 +48,7 @@ Once the server is up and running, you can access the Launcher app from your TVâ
 
 1. Download and install the latest APK compatible with your device's architecture from [here](https://github.com/reisxd/TizenTube/releases/latest) (if unsure, download armeabi-v7a).
 2. After opening the app, change the configuration to suit your needs. Ensure that you set the `appID` to `Ad6NutHP8l.TizenTube` if it isn't already set. Change the IP to match that of your TV.
-3. Change the development IP address on the TV (if not already done from step 5 of Installation steps) to that of this Android device which you'll run the server on.
+3. Change the development IP address on the TV (if not already done from step 4 of Installation steps) to that of this Android device which you'll run the server on.
 4. Press 'Run Server'.
 5. Press 'Launch' whenever you want to launch TizenTube.
 6. Please note that if the app crashes, you may have made an error, such as setting an incorrect IP or failing to change the Developer Mode's Host IP.
