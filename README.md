@@ -83,6 +83,6 @@ Now, everytime you want to watch youtube, start the launcher and it will launch 
 - To update the Tizen applications on the TV, you have to first uninstall one or both apps and run the installation script again (see step 3 of installation steps).
 
 ### My server (phone, pc, raspberry pi) or my TV changes their IPs, what can I do ?
-- You should be able to reserve IP addresses in the DHCP options of your ISP router, so that you can keep the same IPs.
-  Note that only the android app server is impacted by the TV changing its IP.
+- You should be able to reserve IP addresses in the DHCP options of your ISP router, so that you can keep the same IPs.  
+  Note that only the android app server is impacted by the TV changing its IP.  
   If you use the regular node server (option #1), only a change of IP of this server would require you to put the new IP in the Launcher and TV's dev options, the TV can have any IP.
