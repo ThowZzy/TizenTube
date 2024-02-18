@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# To run this script on your Mac, run in a terminal "chmod +x install-wgt_MAC.sh" and then "./install-wgt_MAC.sh"
 # Make sure that the root directory is right, it's the default one here.
 tizen_dir="${HOME}/tizen-studio"
 
