@@ -10,7 +10,8 @@ document.onkeydown = e => {
 
 function prompt_for_ip(previous_IP = "192.168.1.10") {
     document.getElementById("inputbox").innerHTML = `
-    <h2 id="text2">Set Server IP which is running the node server. (Press OK to open the keyboard)</h2>
+    <h2 class="text2">Set Server IP which is running the node server. (Press OK to open the keyboard)</h2>
+    <h2 class="text2">You can specify the port of the server but it is optionnal, by default it will use the port 3000. Examples : 192.168.1.10, 192.168.1.10:8080 ...</h2>
     <label class="label">Server IP:</label>
     <input type="text" class="input" placeholder="IP Address" id="ip">
     `;
@@ -40,9 +41,14 @@ function connect_to_server() {
         return;
     } else {
         var IP = localStorage.getItem('ip');
+        var IP_split = IP.split(":");
         var wsServer;
         try {
-            wsServer = new WebSocket('ws://' + IP + ':3000');
+            if (IP_split.length > 1) {
+                wsServer = new WebSocket('ws://' + IP_split[0] + ":" + IP_split[1]);
+            } else {
+                wsServer = new WebSocket('ws://' + IP_split[0] + ':3000');
+            }
         } catch (e) {
             document.getElementById('text').innerText = 'Could not connect to server.. Check if it is running and submit again its IP.';
             prompt_for_ip(IP);

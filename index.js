@@ -40,7 +40,7 @@ async function createAdbConnection(tv_ip) {
 
 }
 
-const wss = new WebSocketServer({ host: '0.0.0.0', port: 3000 });
+const wss = new WebSocketServer({ host: '0.0.0.0', port: Config.serverPort });
 wss.on('connection', ws => {
     ws.on('message', message => {
         let msg;
