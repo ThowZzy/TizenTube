@@ -32,7 +32,7 @@ After completing these steps, installing apps is complete! You should be able to
 ### Option 1: Install on PC/SBC
 
 1. Download [NodeJS](https://nodejs.org/en) if you haven't already. Check by running the command `npm -v`.
-2. Clone the repository.
+2. Clone the repository. (``git clone https://github.com/ThowZzy/TizenTube-Legacy.git``)
 3. Install modules by running `npm i` in the main folder of the repository.
 4. Install mods modules by running `cd mods` and then running `npm i`.
 5. Build mods by running `npm run build`.
@@ -63,7 +63,7 @@ And now you can launch TizenTube from your Android device!
 
 Now, everytime you want to watch youtube, start the launcher and it will launch an ad-less youtube.
 
-# Troubleshooting
+# F.A.Q
 
 ### The launcher cannot connect to the server ?  
 - Check if you entered the right IP and that the node server is running.  
@@ -76,3 +76,13 @@ Now, everytime you want to watch youtube, start the launcher and it will launch 
 ### Your videos are stuttering every 1 second ?  
 - First check if you have the latest version of the node server or the latest APK.  
 - If you changed the video speed to "1x" you need to change it again to "1.0001x" to fix the stutters.
+
+### How do I update the server and the Tizen applications ?
+- To update the server on Windows/Linux/Mac : Run the command ``git pull`` from the root folder of the repository. And optionnally you should also run ``npm run build`` in /mods folder.
+- To update the server on Android you just have to download the latest APK from the releases.
+- To update the Tizen applications on the TV, you have to first uninstall one or both apps and run the installation script again (see step 3 of installation steps).
+
+### My server (phone, pc, raspberry pi) or my TV changes their IPs, what can I do ?
+- You should be able to reserve IP addresses in the DHCP options of your ISP router, so that you can keep the same IPs.
+  Note that only the android app server is impacted by the TV changing its IP.
+  If you use the regular node server (option #1), only a change of IP of this server would require you to put the new IP in the Launcher and TV's dev options, the TV can have any IP.
