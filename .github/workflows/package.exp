@@ -2,7 +2,7 @@
 
 set timeout -1
 
-cd TizenTube
+cd ../../TizenTube
 
 spawn ../tizen-studio/tools/ide/bin/tizen package -t wgt -o ./release -s TizenTube -- .buildResult
 

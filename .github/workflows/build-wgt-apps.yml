@@ -70,7 +70,7 @@ jobs:
           
       - name: Package WGT
         run: |
-          expect ./package.exp
+          expect ./.github/workflows/package.exp
 
       - name: Build launcher
         run: |
@@ -87,7 +87,7 @@ jobs:
           
       - name: Package WGT launcher
         run: |
-          expect ./package-launcher.exp
+          expect ./.github/workflows/package-launcher.exp
 
       - name: Print logs
         if: always()
