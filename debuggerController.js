@@ -7,7 +7,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function startDebugging(port, adb_conn, tv_ip) {
     // Sleep to get the app to load.
     // For some reason, without it, using the launcher gives an error
-    await sleep(5000)
+    await sleep(3000)
     try {
         const debuggerJsonReq = await nodeFetch(`http://${tv_ip}:${port}/json`);
         const debuggerJson = await debuggerJsonReq.json();
