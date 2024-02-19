@@ -6,7 +6,8 @@ TizenTube is a NodeJS script that enhances your Tizen TV (2017 and newer) viewin
 
 # TizenTube-Legacy ?
 
-This fork follows another development path than the original TizenTube, the original now uses TizenBrew. But I liked the TizenTube only project so I brought it back with the improvements I personally wanted.
+This fork follows another development path than the original TizenTube, the original now uses TizenBrew. But I liked the TizenTube only project so I brought it back with the improvements I personally wanted.  
+One of the main focus is to improve the ease of install and the ease of use in general, to make it more accessible.
 
 ## How it works
 
