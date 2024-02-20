@@ -7,15 +7,15 @@ import { log, log_error } from './utils.js';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let adb;
 
-async function createAdbConnection(tv_ip, ws=null) {
+async function createAdbConnection(tv_ip, ws = null) {
     if (adb?._stream) {
         adb._stream.end();
-        await sleep(200)
+        await sleep(500);
         adb._stream.removeAllListeners('connect');
         adb._stream.removeAllListeners('error');
         adb._stream.removeAllListeners('close');
     } else
-        await sleep(200);
+        await sleep(500);
 
     adb = adbhost.createConnection({ host: tv_ip, port: 26101 });
 
