@@ -2,7 +2,7 @@ import { WebSocketServer } from 'ws';
 import adbhost from 'adbhost';
 import startDebugging from './debuggerController.js';
 import Config from './config.json' assert { type: 'json' };
-import {log, log_error} from './utils.js';
+import { log, log_error } from './utils.js';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let adb;
@@ -27,7 +27,7 @@ async function createAdbConnection(tv_ip) {
                 const kill_job2 = adb.createStream(`shell:0 was_kill I80YHgsJe2.Launcher`);
                 kill_job2.on('data', data2 => {
                     if (data2.toString().includes("spend time")) {
-                        // Wait 500ms to prevent issue
+                        // Wait 200ms to prevent issue
                         setTimeout(() => {
                             // Launch TizenTube in debug mode
                             const shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
@@ -40,7 +40,7 @@ async function createAdbConnection(tv_ip) {
                                     startDebugging(port, adb, tv_ip);
                                 }
                             });
-                        }, 500);
+                        }, 200);
                     }
                 });
             }

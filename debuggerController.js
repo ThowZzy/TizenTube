@@ -2,13 +2,13 @@ import WebSocket from 'ws';
 import nodeFetch from 'node-fetch';
 import { readFileSync } from 'node:fs';
 import Config from './config.json' assert { type: 'json' };
-import {log, log_error} from './utils.js';
+import { log, log_error } from './utils.js';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function startDebugging(port, adb_conn, tv_ip) {
     // Sleep to get the app to load.
     // For some reason, without it, using the launcher gives an error
-    await sleep(3000)
+    await sleep(4000);
     try {
         const debuggerJsonReq = await nodeFetch(`http://${tv_ip}:${port}/json`);
         const debuggerJson = await debuggerJsonReq.json();
