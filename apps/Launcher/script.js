@@ -64,6 +64,9 @@ function connect_to_server() {
                 got_ok = true;
                 //Experimental code to address the issue
             }
+            if(msg.exit){
+                tizen.application.getCurrentApplication().exit();
+            }
         }
 
         wsServer.onopen = function () {
