@@ -2,6 +2,7 @@ import WebSocket from 'ws';
 import nodeFetch from 'node-fetch';
 import { readFileSync } from 'node:fs';
 import Config from './config.json' assert { type: 'json' };
+import {log, log_error} from './utils.js';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function startDebugging(port, adb_conn, tv_ip) {
@@ -13,7 +14,7 @@ async function startDebugging(port, adb_conn, tv_ip) {
         const debuggerJson = await debuggerJsonReq.json();
         return attachDebugger(debuggerJson[0].webSocketDebuggerUrl, adb_conn);
     } catch (error) {
-        console.error('Error attaching debugger:', error.message);
+        log_error('Could not load scripts to TizenTube:', error.message);
         adb_conn._stream.end();
     }
 }
@@ -25,7 +26,7 @@ async function attachDebugger(wsUrl, adb_conn) {
     try {
         modFile = readFileSync('mods/dist/userScript.js', 'utf-8');
     } catch {
-        console.error('Could not find the built mod file. Did you build it?');
+        log_error('Could not find the built mod file. Did you build it?');
         adb_conn._stream.end();
         client.close();
         return;
@@ -41,9 +42,9 @@ async function attachDebugger(wsUrl, adb_conn) {
 
         if (Config.debug) {
             if (msg.method == 'Console.messageAdded') {
-                console.log(msg.params.message.text, msg.params.message.parameters);
+                log(msg.params.message.text, msg.params.message.parameters);
             } else if (msg?.result?.result?.wasThrown) {
-                console.error(msg.result.result.description);
+                log_error(msg.result.result.description);
             }
         }
     }

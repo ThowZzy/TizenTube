@@ -2,6 +2,8 @@ import { WebSocketServer } from 'ws';
 import adbhost from 'adbhost';
 import startDebugging from './debuggerController.js';
 import Config from './config.json' assert { type: 'json' };
+import {log, log_error} from './utils.js';
+
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let adb;
 
@@ -17,7 +19,7 @@ async function createAdbConnection(tv_ip) {
     adb = adbhost.createConnection({ host: tv_ip, port: 26101 });
 
     adb._stream.on('connect', () => {
-        console.log('ADB connection established');
+        log('ADB connection established');
         // Kill TizenTube and the Launcher
         const kill_job = adb.createStream(`shell:0 was_kill ${Config.appId}`);
         kill_job.on('data', data1 => {
@@ -29,11 +31,11 @@ async function createAdbConnection(tv_ip) {
                         setTimeout(() => {
                             // Launch TizenTube in debug mode
                             const shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
-                            console.log("Launching TizenTube...");
+                            log("Launching TizenTube...");
                             shellCmd.on('data', data => {
                                 const dataString = data.toString();
                                 if (dataString.includes('debug')) {
-                                    console.log("TizenTube launched.");
+                                    log("TizenTube launched.");
                                     const port = dataString.substr(dataString.indexOf(':') + 1, 6).replace(' ', '');
                                     startDebugging(port, adb, tv_ip);
                                 }
@@ -46,15 +48,21 @@ async function createAdbConnection(tv_ip) {
     });
 
     adb._stream.on('error', () => {
-        console.log('ADB connection error.');
+        log_error('ADB connection error.');
     });
     adb._stream.on('close', () => {
-        console.log('ADB connection closed.');
+        log('ADB connection closed.');
     });
 
 }
 
 const wss = new WebSocketServer({ host: '0.0.0.0', port: Config?.serverPort ?? 3000 });
+
+wss.on('listening', () => {
+    const address = wss.address();
+    log(`Server listening for the launcher on ${address.address}:${address.port}`);
+});
+
 wss.on('connection', ws => {
     ws.on('message', message => {
         let msg;
