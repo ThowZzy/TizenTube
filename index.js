@@ -21,20 +21,55 @@ async function createAdbConnection(tv_ip, ws = null) {
 
     adb._stream.on('connect', () => {
         log('ADB connection established');
-        // Launch TizenTube in debug mode
-        const shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
+        //Launch TizenTube in debug mode
+        let shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
         log("Launching TizenTube...");
         shellCmd.on('data', data => {
+            if (typeof reconnectInterval !== 'undefined')
+                clearInterval(reconnectInterval); //Cancel retries if we got a response
             const dataString = data.toString();
             if (dataString.includes('debug')) {
                 log("TizenTube launched.");
-                ws.send(JSON.stringify({
-                    exit: true
-                }));
+                if (ws) {
+                    ws.send(JSON.stringify({
+                        exit: true
+                    }));
+                }
                 const port = dataString.substr(dataString.indexOf(':') + 1, 6).replace(' ', '');
                 startDebugging(port, adb, tv_ip);
             }
         });
+
+        let retry_count = 0;
+        //If we don't get any response, we try again (max 3 times)
+        let reconnectInterval = setInterval(() => {
+            shellCmd.removeAllListeners("data");
+            if (retry_count >= 3) {
+                clearInterval(reconnectInterval);
+                log("Failed to launch TizenTube.");
+                adb._stream.end();
+                return;
+            }
+            retry_count++;
+            //Re-Launch TizenTube in debug mode
+            shellCmd = adb.createStream(`shell:0 debug ${Config.appId}${Config.isTizen3 ? ' 0' : ''}`);
+            log("Retry launching TizenTube...");
+            shellCmd.on('data', data => {
+                const dataString = data.toString();
+                if (dataString.includes('debug')) {
+                    log("TizenTube launched.");
+                    clearInterval(reconnectInterval);
+                    //Tell launcher to close itself
+                    if (ws) {
+                        ws.send(JSON.stringify({
+                            exit: true
+                        }));
+                    }
+                    const port = dataString.substr(dataString.indexOf(':') + 1, 6).replace(' ', '');
+                    startDebugging(port, adb, tv_ip);
+                }
+            });
+        }, 3000);
     });
 
     adb._stream.on('error', () => {
