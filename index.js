@@ -138,8 +138,8 @@ function kill_method(adb_conn, tv_ip) {
                     }, 200);
                 }
             });
-        } else if(data1.toString)
-            log(data1.toString); //Log non empty data
+        } else if(data1.toString())
+            log(data1.toString()); //Log non empty data
     });
 }
 
