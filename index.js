@@ -23,15 +23,19 @@ async function createAdbConnection(tv_ip, ws = null) {
         log('ADB connection established');
         switch (Config.launch_method) {
             case 1: {
+                log("Launching TizenTube... [Using basic method]");
                 basic_method(adb, tv_ip, ws);
                 break;
             }
             case 2: {
+                log("Launching TizenTube... [Using kill method]");
                 kill_method(adb, tv_ip);
                 break;
             }
             case 3: {
+                log("Launching TizenTube... [Using retry method]");
                 retry_method(adb, tv_ip, ws);
+                break;
             }
             default: {
                 log("Launch method not found, defaulting to method 1.");
@@ -96,7 +100,6 @@ wss.on('connection', ws => {
 function basic_method(adb_conn, tv_ip, ws) {
     // Launch TizenTube in debug mode
     const shellCmd = adb_conn.createStream(`shell:0 debug Ad6NutHP8l.TizenTube${Config.isTizen3 ? ' 0' : ''}`);
-    log("Launching TizenTube...");
     shellCmd.on('data', data => {
         const dataString = data.toString();
         if (dataString.includes('debug')) {
@@ -124,7 +127,6 @@ function kill_method(adb_conn, tv_ip) {
                     setTimeout(() => {
                         // Launch TizenTube in debug mode
                         const shellCmd = adb_conn.createStream(`shell:0 debug Ad6NutHP8l.TizenTube${Config.isTizen3 ? ' 0' : ''}`);
-                        log("Launching TizenTube...");
                         shellCmd.on('data', data => {
                             const dataString = data.toString();
                             if (dataString.includes('debug')) {
@@ -136,14 +138,14 @@ function kill_method(adb_conn, tv_ip) {
                     }, 200);
                 }
             });
-        }
+        } else if(data1.toString)
+            log(data1.toString); //Log non empty data
     });
 }
 
 function retry_method(adb_conn, tv_ip, ws) {
     //Launch TizenTube in debug mode
     let shellCmd = adb_conn.createStream(`shell:0 debug Ad6NutHP8l.TizenTube${Config.isTizen3 ? ' 0' : ''}`);
-    log("Launching TizenTube...");
 
     let retry_count = 0;
     //If we don't get any response, we try again (max 2 times)
