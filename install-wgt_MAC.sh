@@ -32,6 +32,8 @@ cd "ide/bin"
 ./tizen install -n "${tizen_dir}/TizenTube.wgt"
 echo "========================================================"
 
+./sdb disconnect $userInput
+
 echo ""
 echo "The installation process is over. If all went well, you should have the Launcher and TizenTube installed on your TV."
 echo ""
