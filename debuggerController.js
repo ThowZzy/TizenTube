@@ -8,7 +8,6 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function startDebugging(port, adb_conn, tv_ip) {
     // Sleep to get the app to load.
     // For some reason, without it, using the launcher gives an error
-    log("Waiting before loading scripts into TizenTube..");
     await sleep(4000);
     try {
         const debuggerJsonReq = await nodeFetch(`http://${tv_ip}:${port}/json`);
@@ -39,7 +38,6 @@ async function attachDebugger(wsUrl, adb_conn) {
         if (msg.method && msg.method == 'Runtime.executionContextCreated') {
             client.send(JSON.stringify({ "id": id, "method": "Runtime.evaluate", "params": { "expression": modFile, "objectGroup": "console", "includeCommandLineAPI": true, "doNotPauseOnExceptionsAndMuteConsole": false, "contextId": msg.params.context.id, "returnByValue": false, "generatePreview": true } }))
             id++;
-            log("TizenTube scripts loaded.");
         }
 
         if (Config.debug) {
