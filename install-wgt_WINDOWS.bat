@@ -35,6 +35,7 @@ call tizen install -n %tizen-dir%\Launcher.wgt
 call tizen install -n %tizen-dir%\TizenTube.wgt
 echo =========================================================
 
+cd ../..
 sdb disconnect %userInput%
 
 echo:

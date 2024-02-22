@@ -32,6 +32,7 @@ cd "ide/bin"
 ./tizen install -n "${tizen_dir}/TizenTube.wgt"
 echo "========================================================"
 
+cd ../..
 ./sdb disconnect $userInput
 
 echo ""
