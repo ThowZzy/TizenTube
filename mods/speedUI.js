@@ -56,9 +56,32 @@ speedUIContainer.addEventListener(
     true
 );
 
-document.querySelector('video').addEventListener('canplay', () => {
-    document.getElementsByTagName('video')[0].playbackRate = currentSpeed;
+// Observer to catch when the video element is loaded
+const observer = new MutationObserver((mutationsList, observer) => {
+    // Check each mutation for added nodes
+    mutationsList.forEach(mutation => {
+        mutation.addedNodes.forEach(addedNode => {
+            // If the added node is a video element, add the listener
+            if (addedNode.tagName && addedNode.tagName.toLowerCase() === 'video') {
+                addedNode.addEventListener('canplay', () => {
+                    addedNode.playbackRate = currentSpeed;
+                });
+                observer.disconnect();
+            }
+        });
+    });
 });
+
+const videoElement = document.querySelector('video');
+if (videoElement) { //If video element is already loaded, add listener
+    videoElement.addEventListener('canplay', () => {
+        videoElement.playbackRate = currentSpeed;
+    });
+    console.log("After listening.");
+} else { //Else wait for the element to be loaded
+    observer.observe(document.body, { childList: true, subtree: true });
+}
+
 
 speedUIContainer.innerHTML = `
 <h1>TizenTube Video Speed Settings</h1>
