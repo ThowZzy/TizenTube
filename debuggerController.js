@@ -8,7 +8,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function startDebugging(port, adb_conn, tv_ip) {
     // Sleep to get the app to load.
     // For some reason, without it, using the launcher gives an error
-    await sleep(4000);
+    // await sleep(4000);
     try {
         const debuggerJsonReq = await nodeFetch(`http://${tv_ip}:${port}/json`);
         const debuggerJson = await debuggerJsonReq.json();
@@ -35,7 +35,7 @@ async function attachDebugger(wsUrl, adb_conn) {
         const msg = JSON.parse(message.data);
 
         // Future-proof it just incase the page reloads/something happens.
-        if (msg.method && msg.method == 'Runtime.executionContextCreated') {
+        if (msg.method && msg.method == 'Runtime.executionContextCreated' && msg.params.context.origin=="https://www.youtube.com") {
             client.send(JSON.stringify({ "id": id, "method": "Runtime.evaluate", "params": { "expression": modFile, "objectGroup": "console", "includeCommandLineAPI": true, "doNotPauseOnExceptionsAndMuteConsole": false, "contextId": msg.params.context.id, "returnByValue": false, "generatePreview": true } }))
             id++;
         }
