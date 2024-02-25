@@ -45,8 +45,8 @@ async function createAdbConnection(tv_ip, ws = null) {
         }
     });
 
-    adb._stream.on('error', () => {
-        log_error('ADB connection error.');
+    adb._stream.on('error', (error) => {
+        log_error(`ADB connection error. (${error.message})`);
     });
     adb._stream.on('close', () => {
         log('ADB connection closed.');
@@ -136,10 +136,11 @@ function kill_method(adb_conn, tv_ip) {
                             }
                         });
                     }, 200);
-                }
+                } else if (data2.toString().replace(/[\s\r\n]/g, '') != "")
+                    log(data2.toString().replace(/[\r\n]/g, '')); //Log non empty data from kill command
             });
-        } else if(data1.toString())
-            log(data1.toString()); //Log non empty data
+        } else if (data1.toString().replace(/[\s\r\n]/g, '') != "")
+            log(data1.toString().replace(/[\r\n]/g, '')); //Log non empty data from kill command
     });
 }
 

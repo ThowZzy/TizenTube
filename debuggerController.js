@@ -6,9 +6,6 @@ import { log, log_error } from './utils.js';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function startDebugging(port, adb_conn, tv_ip) {
-    // Sleep to get the app to load.
-    // For some reason, without it, using the launcher gives an error
-    // await sleep(4000);
     try {
         const debuggerJsonReq = await nodeFetch(`http://${tv_ip}:${port}/json`);
         const debuggerJson = await debuggerJsonReq.json();
@@ -21,13 +18,14 @@ async function startDebugging(port, adb_conn, tv_ip) {
 
 async function attachDebugger(wsUrl, adb_conn) {
     const client = await new WebSocket(wsUrl);
+    //We don't need the adb connection at this point
+    adb_conn._stream.end();
     let id = 12;
     let modFile;
     try {
         modFile = readFileSync('mods/dist/userScript.js', 'utf-8');
     } catch {
         log_error('Could not find the built mod file. Did you build it?');
-        adb_conn._stream.end();
         client.close();
         return;
     }
@@ -36,8 +34,9 @@ async function attachDebugger(wsUrl, adb_conn) {
 
         // Future-proof it just incase the page reloads/something happens.
         if (msg.method && msg.method == 'Runtime.executionContextCreated' && msg.params.context.origin=="https://www.youtube.com") {
-            client.send(JSON.stringify({ "id": id, "method": "Runtime.evaluate", "params": { "expression": modFile, "objectGroup": "console", "includeCommandLineAPI": true, "doNotPauseOnExceptionsAndMuteConsole": false, "contextId": msg.params.context.id, "returnByValue": false, "generatePreview": true } }))
+            client.send(JSON.stringify({ "id": id, "method": "Runtime.evaluate", "params": { "expression": modFile, "objectGroup": "console", "includeCommandLineAPI": true, "doNotPauseOnExceptionsAndMuteConsole": false, "contextId": msg.params.context.id, "returnByValue": false, "generatePreview": true } }));
             id++;
+            log("Injected scripts to TizenTube successfully!");
         }
 
         if (Config.debug) {
@@ -55,7 +54,6 @@ async function attachDebugger(wsUrl, adb_conn) {
 
         client.send(JSON.stringify({ "id": 7, "method": "Debugger.enable" }));
         client.send(JSON.stringify({ "id": 11, "method": "Runtime.enable" }));
-        adb_conn._stream.end();
     }
 }
 
