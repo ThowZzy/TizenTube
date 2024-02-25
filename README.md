@@ -36,7 +36,7 @@ After completing these steps, installing apps is complete! You should be able to
 2. Clone the repository. (``git clone https://github.com/ThowZzy/TizenTube-Legacy.git``)
 3. Install modules by running `npm i` in the main folder of the repository.
 4. Install mods modules by running `cd mods` and then running `npm i`.
-5. Build mods by running `npm run build`.
+5. Still in /mods folder, build mods by running `npm run build`.
 6. Navigate back to the main folder of the repository by running `cd ..`.
 7. Open `config.json` in your favorite text editor. Change `isTizen3` to true ONLY if your TV runs on Tizen 3. And change the default port from 3000 to something not in use if you already have something on port 3000 (Keeping default is recommended otherwise).
 8. Still in config.json, change the launch_method to any number between 1 and 3. 1 = Basic method, 2 = Kill method, 3 = Retry method. Test which ever works best on your TV.
