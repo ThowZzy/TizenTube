@@ -1,3 +1,4 @@
+tizen.tvinputdevice.registerKey('ColorF1Green');
 document.onkeydown = e => {
     switch (e.keyCode) {
         case 404:
