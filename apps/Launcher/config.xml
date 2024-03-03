@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="https://tizentube.live"
-   version="1.0.2" viewmodes="maximized">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://github.com/reisxd/TizenTube" version="1.0.0" viewmodes="maximized">
    <access origin="*" subdomains="true" />
    <tizen:application id="I80YHgsJe2.Launcher" package="I80YHgsJe2" required_version="2.3" />
    <author href="https://tizentube.live">Reis Can</author>
@@ -16,8 +15,7 @@
    <name>Launcher</name>
    <tizen:privilege name="http://tizen.org/privilege/application.launch" />
    <tizen:profile name="tv-samsung" />
-   <tizen:setting screen-orientation="landscape" context-menu="enable" background-support="enable" encryption="disable"
-      install-location="auto" hwkey-event="enable" />
+   <tizen:setting screen-orientation="landscape" context-menu="enable" background-support="enable" encryption="disable" install-location="auto" hwkey-event="enable" />
    <tizen:service id="I80YHgsJe2.LauncherService">
       <tizen:content src="service/dist/index.js" />
       <tizen:name>TizenTubeService</tizen:name>

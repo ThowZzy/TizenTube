@@ -1,9 +1,8 @@
-import WebSocket from 'ws';
-import nodeFetch from 'node-fetch';
-import { readFileSync } from 'node:fs';
-import Config from './config.json' assert { type: 'json' };
-import { log, log_error } from './utils.js';
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const WebSocket = require('ws');
+const nodeFetch = require('node-fetch');
+const { readFileSync } = require('node:fs');
+const Config = require('./config.json');
+const { log, log_error } = require('./utils.js');
 
 async function startDebugging(port, adb_conn, tv_ip) {
     try {
