@@ -44,6 +44,14 @@ jobs:
           
       - name: Install Needed packages
         run: sudo apt install expect
+
+      - name: Install modules and build service
+        working-directory: apps/Launcher/service
+        run: |
+          npm i
+          cd mods
+          npm i
+          npm run build
       
       - name: Download Tizen-Studio
         run: |
