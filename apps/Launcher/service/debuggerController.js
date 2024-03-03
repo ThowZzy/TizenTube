@@ -56,4 +56,4 @@ async function attachDebugger(wsUrl, adb_conn) {
     }
 }
 
-export default startDebugging;
+module.exports = startDebugging;
