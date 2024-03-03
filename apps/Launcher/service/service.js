@@ -13,7 +13,7 @@ function sleep(ms) {
 }
 
 async function createAdbConnection(tv_ip, ws = null, isTizen3) {
-    if (adb?._stream) {
+    if (adb && adb._stream !== null || adb._stream !== undefined) {
         adb._stream.end();
         await sleep(300);
         adb._stream.removeAllListeners('connect');
@@ -59,7 +59,7 @@ async function createAdbConnection(tv_ip, ws = null, isTizen3) {
 
 }
 
-const wss = new WebSocketServer({ host: '0.0.0.0', port: Config?.serverPort ?? 3000 });
+const wss = new WebSocketServer.Server({ host: '0.0.0.0', port: 3000 });
 
 wss.on('listening', () => {
     const address = wss.address();
