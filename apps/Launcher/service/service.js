@@ -4,8 +4,13 @@ const startDebugging = require('./debuggerController.js');
 const Config = require('./config.json');
 const { log, log_error } = require('./utils.js');
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 let adb;
+
+function sleep(ms) {
+    return new Promise(function(resolve) {
+        setTimeout(resolve, ms);
+    });
+}
 
 async function createAdbConnection(tv_ip, ws = null, isTizen3) {
     if (adb?._stream) {

@@ -17,7 +17,7 @@
    <tizen:profile name="tv-samsung" />
    <tizen:setting screen-orientation="landscape" context-menu="enable" background-support="enable" encryption="disable" install-location="auto" hwkey-event="enable" />
    <tizen:service id="I80YHgsJe2.LauncherService">
-      <tizen:content src="service/dist/index.js" />
+      <tizen:content src="service/index.js" />
       <tizen:name>TizenTubeService</tizen:name>
       <tizen:description>TizenTubeService</tizen:description>
    </tizen:service>
