@@ -10,16 +10,16 @@ set url=https://github.com/ThowZzy/TizenTube-Legacy/releases/latest/download
 %tizen-dir:~0,1%:
 
 echo:
-set /p userInput="Type here the IP of your TV (make sure you did step 2 before) : "
-echo:
-
-echo:
 echo =================== WGT Download =====================
 echo Downloading wgt files from releases...
 echo:
 curl -L "%url%/Launcher.wgt" -o "%tizen-dir%/Launcher.wgt"
 curl -L "%url%/TizenTube.wgt" -o "%tizen-dir%/TizenTube.wgt"
 echo =======================================================
+
+echo:
+set /p userInput="Type here the IP of your TV (make sure you did step 2 before) : "
+echo:
 
 echo:
 echo ================= Connecting to the TV ================

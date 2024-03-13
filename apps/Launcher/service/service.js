@@ -59,7 +59,7 @@ async function createAdbConnection(tv_ip, ws = null, isTizen3) {
 
 }
 
-const wss = new WebSocketServer({ host: '0.0.0.0', port: 3000 });
+const wss = new WebSocketServer.Server({ host: '0.0.0.0', port: 3000 });
 
 wss.on('listening', () => {
     const address = wss.address();
