@@ -1,17 +1,12 @@
 function connect_to_server() {
-    document.getElementById('text').innerText = 'Got here.';
     const isTizen3 = navigator.userAgent.includes('Tizen 3.0');
-    document.getElementById('text').innerText = 'Got here 2';
     var wsServer;
     try {
-        document.getElementById('text').innerText = 'Got here 3';
         wsServer = new WebSocket('ws://127.0.0.1:3000');
-        document.getElementById('text').innerText = 'Got here 4';
     } catch (e) {
         document.getElementById('text').innerText = 'Could not connect to server..';
         return;
     }
-    document.getElementById('text').innerText = 'Got here 5';
     var got_ok = false;
     wsServer.onmessage = function (message) {
         const msg = JSON.parse(message.data);
@@ -28,7 +23,6 @@ function connect_to_server() {
     }
 
     wsServer.onopen = function () {
-        document.getElementById('text').innerText = 'Got here 6';
         wsServer.send(JSON.stringify({
             e: 'launch',
             version: isTizen3
