@@ -52,6 +52,7 @@ function start_service(){
         var service_id = pkg_id + ".LauncherService";
         tizen.application.launchAppControl(new tizen.ApplicationControl('http://tizen.org/appcontrol/operation/service'), service_id, function () {
             document.getElementById('text').innerText = "Service started..";
+            window.begin();
             connect_to_server();
         }, function (e) {
             alert('Launch Service failed: ' + e.message);
@@ -60,6 +61,7 @@ function start_service(){
 
     testWS.onopen = () => {
         document.getElementById('text').innerText = "Service is already running.";
+        window.begin();
         testWS.close();
         connect_to_server();
     };
