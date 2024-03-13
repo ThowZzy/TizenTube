@@ -19,7 +19,6 @@ function connect_to_server() {
     var got_ok = false;
     wsServer.onmessage = function (message) {
         const msg = JSON.parse(message.data);
-        document.getElementById('text').innerText = "Got answer from server.";
         if (msg.ok) { //Improve here: SDB connection can still fail here if TV Developer IP isn't right 
             //-> Catch this and ask user to change it (can also happen if an sdb conn already exists)
             //tizen.application.getCurrentApplication().exit();
