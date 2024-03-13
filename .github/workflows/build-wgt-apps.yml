@@ -49,9 +49,6 @@ jobs:
         working-directory: apps/Launcher/service
         run: |
           npm i
-          npm install -g @vercel/ncc
-          ncc build simple_service.js
-          rm -r node_modules
           cd mods
           npm i
           npm run build
