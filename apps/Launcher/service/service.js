@@ -1,8 +1,8 @@
-const adbhost = require('adbhost');
-const WebSocketServer = require('ws');
-const startDebugging = require('./debuggerController.js');
-const Config = require('./config.json');
-const { log, log_error } = require('./utils.js');
+import { WebSocketServer } from 'ws';
+import adbhost from 'adbhost';
+import startDebugging from './debuggerController.js';
+import Config from './config.json' assert { type: 'json' };
+import { log, log_error } from './utils.js';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let adb;
