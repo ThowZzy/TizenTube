@@ -15,7 +15,7 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "adbhost": "^0.0.2",
-    "node-fetch": "^2.7.0",
-    "ws": "^4.1.0"
+    "node-fetch": "^3.3.1",
+    "ws": "^8.13.0"
   }
 }
