@@ -49,7 +49,7 @@ function connect_to_server() {
 }
 
 function start_service(){
-    var testWS = new WebSocket(`ws://127.0.0.1:8081`);
+    var testWS = new WebSocket(`ws://127.0.0.1:3000`);
     testWS.onerror = () => {
         var pkg_id = tizen.application.getCurrentApplication().appInfo.packageId;
         var service_id = pkg_id + ".LauncherService";
