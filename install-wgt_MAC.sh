@@ -6,17 +6,17 @@ tizen_dir="${HOME}/tizen-studio"
 # URL to download wgt files
 url="https://github.com/ThowZzy/TizenTube-Legacy/releases/latest/download"
 
+echo ""
+echo "Type here the IP of your TV (make sure you did step 2 before) : "
+read userInput
+echo ""
+
 echo "=================== WGT Download ====================="
 echo "Downloading wgt files from releases..."
 echo ""
 curl -L "${url}/Launcher.wgt" -o "${tizen_dir}/Launcher.wgt"
 curl -L "${url}/TizenTube.wgt" -o "${tizen_dir}/TizenTube.wgt"
 echo "======================================================="
-
-echo ""
-echo "Type here the IP of your TV (make sure you did step 2 before) : "
-read userInput
-echo ""
 
 echo ""
 echo "================= Connecting to the TV ================"
